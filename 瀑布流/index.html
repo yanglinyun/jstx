@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            padding: 0 10%;
+        }
+        .container img{
+            width: 100%;
+        }
+        .container div{
+            float: left;
+            width: 18%;
+        }
+        .container div:nth-child(-n+4){
+            margin-right: 1%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cc"><img src="1.jpg" alt=""></div>
+        <div class="cc"><img src="2.jpg" alt=""></div>
+        <div class="cc"><img src="3.jpg" alt=""></div>
+        <div class="cc"><img src="4.jpg" alt=""></div>
+        <div class="cc"><img src="5.jpg" alt=""></div>
+    </div>
+   
+</body>
+<script>
+    var colHeight = new Array(5);
+    var ccs = document.getElementsByClassName("cc");
+    updateH();
+    document.onmousewheel = function (e) {
+        updateH();
+        var rand = parseInt(Math.random()*5)+1;
+        var min = Math.min.apply(null,colHeight);
+        var index = colHeight.indexOf(min);
+        ccs[index].innerHTML += `<img src="${rand}.jpg" alt="">`;
+    }
+    function updateH(){
+        for(var i=0;i<ccs.length;i++){
+            console.log(ccs[i])
+            colHeight[i] = ccs[i].offsetHeight;
+        }
+    }
+</script>
+</html>

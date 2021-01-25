@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>线性变化实现擦亮的按钮</title>
+    <style>
+        body{
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /*占满页面*/
+            min-height: 100vh;
+        }
+        button{
+            position: relative;
+            width: 100px;
+            height: 50px;
+            background-color: rgb(204, 83, 204);
+            border: 0;
+            border-radius: 5px;
+            font-size: 1.5em;
+            letter-spacing: 1px;
+            overflow: hidden;
+        }
+        button::before{
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 50px;
+            left: -100px;
+            top: 0;
+            
+            border: 0;
+            border-radius: 5px;
+            transition: left 1s;
+            background-image: linear-gradient(90deg, transparent,#fff, transparent);
+        }
+        /*控制伪元素位置*/
+        button:hover::before{
+            left: 100px;
+        }
+    </style>
+</head>
+<body>
+    <button>按钮</button>
+</body>
+</html>

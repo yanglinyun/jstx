@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            margin: 100px auto;
+            width: 400px;
+            height: 500px;
+            border: 1px solid #000;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .content {
+            position: absolute;
+            float: left;
+            width: 95%;
+            border: 1px solid #000;
+
+        }
+
+        .barBox {
+            position: relative;
+            width: 4%;
+            float: right;
+            height: 500px;
+            background-color: beige;
+        }
+
+        .bar {
+            position: absolute;
+            width: 100%;
+            height: 10%;
+            background-color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="content">
+            内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+            内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+        </div>
+        <div class="barBox">
+            <div class="bar"></div>
+        </div>
+    </div>
+    <script>
+        var box = document.getElementsByClassName("box")[0];
+        var bar = document.getElementsByClassName("bar")[0];
+        var content = document.getElementsByClassName("content")[0];
+        var contentH = content.offsetHeight;
+        var box = document.getElementsByClassName("box")[0];
+        var boxH = box.offsetHeight;
+        var barPercent = boxH / contentH;
+        bar.style.height = barPercent * 100 + "%";
+        bar.style.top = 0;
+        var barBox = document.getElementsByClassName("barBox")[0];
+        var barBoxH = barBox.offsetHeight;
+
+        bar.onmousedown = function (e) {
+            var init_y = e.pageY;
+            var init_top = parseFloat(bar.style.top) / 100;
+            this.onmousemove = function (e) {
+                var step = e.pageY - init_y;
+
+                var scorllPercent = step / barBoxH;
+                var top = init_top + scorllPercent;
+                if (top + barPercent > 1) {
+                    top = (1 - barPercent)
+                    this.style.top = top * 100 +
+                        "%";
+                } else if (top < 0) {
+                    top = 0;
+                    this.style.top = top + "%";
+                } else {
+                    this.style.top = top * 100 + "%";
+                }
+
+                content.style.top = -top * 100 + "%";
+            }
+        };
+        box.onmousewheel = function (e) {
+            var scroll = 0;
+            var init_top = parseFloat(bar.style.top) / 100;
+            e = e || window.event;
+            if (e.wheelDelta) {
+                scroll = e.wheelDelta;
+            } else if (e.detail) {
+                scroll = e.detail;
+            }
+            var step = -scroll;
+
+            var scorllPercent = step / barBoxH;
+            var top = init_top + scorllPercent;
+
+            if (top + barPercent > 1) {
+                top = (1 - barPercent)
+                bar.style.top = top * 100 +
+                    "%";
+            } else if (top < 0) {
+                top = 0;
+                bar.style.top = top + "%";
+            } else {
+                bar.style.top = top * 100 + "%";
+            }
+            console.log(top)
+            content.style.top = -top * 100 + "%";
+            e.preventDefault();
+        }
+        bar.onmouseup = function () {
+            bar.onmousemove = null;
+        }
+        bar.onmouseout = function () {
+            bar.onmousemove = null;
+        }
+    </script>
+</body>
+
+</html>

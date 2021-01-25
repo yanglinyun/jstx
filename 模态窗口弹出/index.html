@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+        .mask{
+            position: absolute;
+            width: 100%;
+            height: 100vh;background-color: gray;
+        }
+        .login{
+            background-color: rgba(134, 196, 204, 0.432);
+            width: 500px;
+            margin: 200px auto;
+            text-align: center;
+            position: relative;
+        }
+        .login input{
+            margin: 20px;
+        }
+        #closeBtn{
+            width: 20px;
+            height: 20px;
+            display: block;
+            position: absolute;
+            top: -10px;
+            right: -5px;
+            border: 1px solid #fff;
+            border-radius: 50%;
+            background-color: aqua;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="mask">
+        <div class="login">
+            <span id="closeBtn">X</span>
+            用户名: <input type="text" name="username" id="username"><br>
+            密码:&nbsp;&nbsp;&nbsp; <input type="text" name="username" id="username"><br>
+            <input type="submit" value="登录">
+        </div>
+    </div>
+    <script>
+        var mask = document.getElementsByClassName("mask")[0];
+        var maskH = mask.offsetHeight;
+        var maskW = mask.offsetWidth;
+        var login  =document.getElementsByClassName("login")[0];
+        var borderH = maskH-login.offsetHeight;
+        var borderW = maskW-login.offsetWidth-10;//-10是由于关闭按钮突出10px
+        document.getElementById("closeBtn").onclick = function (e) {
+            document.getElementsByClassName("mask")[0].style.display="none";
+        }
+        //登录拖动
+        login.onmousedown = function (e){
+        //获取最初鼠标坐标
+        var init_x = e.pageX;
+        var init_y = e.pageY;
+        var r_x = e.pageX-this.offsetLeft;
+        var r_y = e.pageY-this.offsetTop;
+  
+        this.onmousemove = function (e){
+        //获取鼠标偏移
+        var next_x = e.pageX - r_x;
+        var next_y = e.pageY - r_y;
+        if(next_y>borderH){
+            next_y = borderH;
+        }else if(next_y<10){//10是由于关闭按钮突出10px
+            next_y = 10;
+        }
+        console.log(borderW,next_x)
+        if(next_x>borderW){
+            next_x = borderW;
+        }else if(next_x<0){
+            next_x = 0;
+        }
+       
+        this.style.left = next_x +"px";
+        this.style.top = next_y +"px";
+        this.style.margin = 0;
+        }
+    }
+        login.onmouseup = function (e){
+            this.onmousemove = null;
+        }
+        login.onmouseout = function (e){
+            this.onmousemove = null;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .show {
+            margin: 100px auto;
+            height: 400px;
+            width: 600px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .arrow {
+            position: absolute;
+            width: 100%;
+            z-index: 999;
+            font-size: 4em;
+            top: 50%;
+            transform: translateY(-50%);
+
+        }
+
+        .left,
+        .right {
+            background: rgb(121, 118, 118);
+            opacity: 0.5;
+        }
+
+        .left {
+            float: left;
+        }
+
+        .right {
+            float: right;
+        }
+
+        .show ul {
+
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            z-index: 999;
+            margin-bottom: 1px;
+            margin-right: 1px;
+        }
+
+        .left:hover,
+        .right:hover {
+            opacity: 1;
+        }
+
+        .show li {
+            list-style: none;
+            display: inline-block;
+            width: 20px;
+            background-color: wheat;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .show .actived {
+            background-color: orange;
+        }
+
+        .list {
+            font-size: 0;
+            /*清除图片水平间隙*/
+            position: absolute;
+            width: 3600px;
+
+        }
+
+        .show img {
+            margin: 0;
+            width: 600px;
+            height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="show">
+        <div class="arrow">
+            <div class="left">
+                <</div> <div class="right">>
+            </div>
+        </div>
+        <ul id="numberList">
+            <li class="actived">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <div class="list">
+            <img src="./1.jpg" alt="">
+            <img src="./2.jpg" alt="">
+            <img src="./3.jpg" alt="">
+            <img src="./4.jpg" alt="">
+            <img src="./5.jpg" alt="">
+            <img src="./1.jpg" alt="">
+        </div>
+    </div>
+    <script>
+        var show = document.getElementsByClassName("show")[0];//轮播图
+        var arrow = document.getElementsByClassName("arrow")[0];//切换箭头
+        var right = document.getElementsByClassName("right")[0];//图片列表
+        var imgList = document.getElementsByClassName("list")[0];//下标列表
+        var numberList = document.getElementById("numberList").children;//所有数字下标
+        var preLi = 0; //上一个下标 用于清除actived
+        var autoSliderTimer = null;//自动播放计时器
+        const oneImgW = 600;//一张图片宽度
+        var isAutoPlay = true;//是否在自动播放
+        var replayAuto = null; //恢复自动播放3s
+        var isMoving = false; //正在移动无法点击
+        //自动轮播图
+        function autoSlider() {
+            autoSliderTimer = setInterval(function (e) {
+                animation(imgList, "right", oneImgW); //right默认方向 oneImgW一张图片距离
+            }, 3000);
+        }
+        autoSlider();
+
+
+        //切换箭头绑定事件
+        arrow.onclick = function changeImg(e) {
+            var btn = e.target.getAttribute("class");
+            clearInterval(autoSliderTimer);//清除自动播放
+            isAutoPlay = false;
+            animation(imgList, btn, oneImgW);
+        }
+
+        //所有数字下标绑定事件
+        for (var i = 0; i < numberList.length; i++) {
+            numberList[i].onclick = function (i) { //闭包
+                return function (e) {
+                    if (isMoving) {//如果在移动图片就禁止点击事件发生
+                        return false;
+                    }
+                    clearInterval(autoSliderTimer);
+                    isAutoPlay = false;
+                    imgList.style.left = -1 * i * oneImgW + "px";
+                    var curLi = i;
+                    numberList[preLi].classList.remove("actived");
+                    numberList[curLi].classList.add("actived");
+                    preLi = curLi;
+                    replayAutoFn();
+                };
+            }(i)
+        }
+
+        function animation(ele, direction, distance) {
+            if (isMoving) {//正在移动图片不能点击
+                return false;
+            }
+            isMoving = true;
+            var flag = 1;//默认向左移动
+            if (direction == "right") {
+                flag = -flag;
+            }
+            var curLeft = parseInt(window.getComputedStyle(ele)['left']);
+            //无缝效果
+            if (curLeft == 0 && flag == 1) { //向左才换图片 第一道最后
+                ele.style.left = -3000 + "px";
+            }
+            var timer = setInterval(function () {
+                curLeft = parseInt(window.getComputedStyle(ele)['left']);
+                ele.style.left = curLeft + flag * 6 + "px";
+                distance -= 6;
+                if (distance <= 0) {
+                    clearInterval(timer);
+                    curLeft = parseInt(window.getComputedStyle(ele)['left']);
+                    if (curLeft == -3000 && flag == -1) { //向有才换图片 最后到第一
+                        ele.style.left = 0 + "px";
+                    }
+                    //设置列表
+                    curLeft = parseInt(window.getComputedStyle(ele)['left']);
+                    var curLi = Math.abs(curLeft / oneImgW)
+                    numberList[preLi].classList.remove("actived");
+                    numberList[curLi].classList.add("actived");
+                    preLi = curLi;
+                    isMoving = false; //移动完毕可以点击切换
+                    replayAutoFn();//恢复轮播
+                }
+
+            }, 10);
+
+        }
+        //恢复自动轮播
+        function replayAutoFn() {
+            if (!isAutoPlay) {
+                clearTimeout(replayAuto);
+                replayAuto = setTimeout(function () {
+                    autoSlider();
+                    clearTimeout(replayAuto);
+                }, 3000);
+                isAutoPlay = true;
+            }
+        }
+    </script>
+    </script>
+</body>
+
+</html>

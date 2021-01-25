@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,
+        div {
+            padding: 0;
+            margin: 0;
+        }
+
+        .box {
+            position: relative;
+            width: 90%;
+            margin: 100px auto;
+        }
+
+        .box #mainImg {
+
+            height: 500px;
+
+        }
+
+        #mask {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(199, 131, 131, 0.4);
+            z-index: 999;
+            top: 0;
+            cursor: move;
+        }
+
+        .box .zoom {
+
+            display: inline-block;
+            width: 500px;
+            height: 500px;
+            border: 1px solid #000;
+
+            overflow: hidden;
+        }
+
+        #zoomImg {
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div id="mask">
+
+        </div>
+        <img src="./1.jpg" id="mainImg" alt="">
+        <div class="zoom">
+            <img src="./1.jpg" id="zoomImg" alt="">
+        </div>
+    </div>
+    <script>
+        document.getElementById("mainImg").onmouseenter = function (e) {
+            var box = document.getElementsByClassName("box")[0];
+            var mask = document.getElementById("mask");
+            var zoomImg = document.getElementById("zoomImg");
+            var maxWidth = this.offsetWidth - mask.offsetWidth;
+            var maxHeight = this.offsetHeight - mask.offsetHeight;
+            //获取最初鼠标坐标
+            document.getElementById("mask").onmousemove = moveFn;
+            this.onmousemove = moveFn;
+            document.getElementById("mainImg").onmouseout = function (e) {
+                this.onmousemove = null;
+            }
+
+            function moveFn(e) {
+                var r_x = e.pageX - box.offsetLeft;
+                var r_y = e.pageY - box.offsetTop;
+                var nextLeft = r_x - mask.offsetWidth / 2;
+                var nextTop = r_y - mask.offsetHeight / 2;
+                //便捷
+                if (nextLeft < 0) {
+                    nextLeft = 0;
+                }
+                if (nextLeft > maxWidth) {
+                    nextLeft = maxWidth;
+                }
+                if (nextTop < 0) {
+                    nextTop = 0;
+                }
+                if (nextTop > maxHeight) {
+                    nextTop = maxHeight;
+                }
+                //获取鼠标偏移
+                mask.style.left = nextLeft + "px";
+                mask.style.top = nextTop + "px";
+                zoomImg.style.left = -nextLeft * 3.9 + "px";
+                zoomImg.style.top = -nextTop * 3.8 + "px";
+            }
+        }
+    </script>
+</body>
+
+</html>
