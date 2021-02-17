@@ -1,0 +1,91 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  background-color: #ffff66;
+  width: 100vw;
+  height: 100vh;
+}
+.accordion {
+  width: 300px;
+  margin: 50px auto;
+  background-color: #99cc66;
+  border-radius: 6px;
+  input {
+    display: none;
+  }
+  ol {
+    label {
+      display: block;
+      font-size: 1.5em;
+      text-align: center;
+      background-color: #ff6666;
+      position: relative;
+      &::before,
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+      }
+      &::before {
+        width: 20px;
+        height: 20px;
+        background-color: #000;
+        clip-path: polygon(0% 0%, 50% 50%, 0% 100%);
+        top: calc(50% - 10px);
+        left: 10px;
+        transform-origin: 25% 50%;
+        transition: transform 1s ease;
+      }
+      &::after {
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        background-color: inherit;
+        right: 10%;
+        transform: rotateZ(45deg);
+        bottom: 2px;
+      }
+    }
+    li {
+      position: relative;
+      list-style-position: inside;
+      padding: 5px;
+      display: none;
+    
+    }
+    li:not(:first-of-type) {
+      border-top: 2px solid #000;
+    }
+    li::before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 3px;
+      height: 15px;
+      top: calc(50% - 7px);
+      left: 0;
+      background-color: blue;
+      transition: all 0.5s ease;
+      transform: scale(0);
+    }
+    li:hover {
+      &::before {
+        transition: all 0.5s ease;
+        transform: scale(1);
+      }
+    }
+
+    input[type="checkbox"]:checked ~ li {
+      display: block;
+    }
+    input[type="checkbox"]:checked ~ label::before {
+      transform: rotateZ(90deg);
+      transition: transform 1s ease;
+    }
+    input[type="checkbox"]:checked ~ label::after {
+      bottom: -8px;
+    }
+  }
+}

@@ -1,0 +1,55 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    height: 100vh;
+}
+.container{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    a{
+        width: 150px;
+        line-height: 50px;
+        text-align: center;
+        display: block;
+        background-color: red;
+        margin-bottom: 50px;
+        text-decoration: none;
+        font-size: 2em;
+        font-weight: bold;
+        color: #fff;
+        position: relative;
+        &::before,
+        &::after{
+            content: "";
+            display: block;
+            width: 50px;
+            height: 20px;
+            position: absolute;
+            transition: all 1s ease;
+        }
+        &::before{
+            top: -2px;
+            left: -2px;
+            border-top: 4px solid yellow;
+            border-left: 4px solid yellow;
+        }
+        &::after{
+            bottom: -2px;
+            right: -2px;
+            border-right: 4px solid yellow;
+            border-bottom: 4px solid yellow;
+        }
+        &:hover{
+            &::before,
+            &::after{
+                height: 100%;
+                width: 100%;
+                transition: all 1s ease;
+            }
+        }
+    }
+}

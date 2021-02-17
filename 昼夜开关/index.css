@@ -1,0 +1,133 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  background-color: #fff;
+  height: 100vh;
+  width: 100vw;
+}
+.btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+}
+.btn #btn-c {
+  display: none;
+}
+.btn #btn-c:checked + .btn-cl {
+  background-color: #003399;
+}
+.btn #btn-c:checked + .btn-cl .round::before,
+.btn #btn-c:checked + .btn-cl::before,
+.btn #btn-c:checked + .btn-cl::after {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #fff;
+  left: 10px;
+  transition: all 2s ease;
+}
+.btn #btn-c:checked + .btn-cl::before {
+  top: 10%;
+  left: 20px;
+}
+.btn #btn-c:checked + .btn-cl .round {
+  animation: move 1s ease-in forwards;
+  right: 0;
+  background-color: #999999;
+}
+.btn #btn-c:checked + .btn-cl .round::before {
+  top: 30%;
+  left: -20px;
+}
+.btn #btn-c:checked + .btn-cl .round::after {
+  display: block;
+}
+.btn .btn-cl {
+  transition: all 2s ease;
+  overflow: hidden;
+  position: relative;
+  display: block;
+  width: 80px;
+  height: 40px;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 20px;
+}
+.btn .btn-cl .round {
+  animation: move-reverse 1s ease-in forwards;
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  border: 1px solid #000;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #ffff00;
+  z-index: 999;
+}
+.btn .btn-cl .round::before,
+.btn .btn-cl .round::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.btn .btn-cl .round::before {
+  width: 6px;
+  height: 6px;
+  background-color: #cc3333;
+  top: 38%;
+  right: -25px;
+}
+.btn .btn-cl .round::after {
+  background-color: grey;
+  top: 5px;
+  left: 7px;
+  box-shadow: -5px 7px 0 -2px grey;
+  display: none;
+}
+.btn .btn-cl::before,
+.btn .btn-cl::after {
+  transition: all 2s ease;
+  content: "";
+  width: 20px;
+  height: 5px;
+  background-color: #003399;
+  display: block;
+  position: absolute;
+  right: 10%;
+  top: 50%;
+}
+.btn .btn-cl::before {
+  top: 30%;
+  right: 20%;
+}
+@keyframes move {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: 15px;
+    width: 50px;
+  }
+  100% {
+    right: 0;
+  }
+}
+@keyframes move-reverse {
+  0% {
+    right: 0;
+  }
+  50% {
+    right: 15px;
+    width: 50px;
+  }
+  100% {
+    left: 0;
+  }
+}

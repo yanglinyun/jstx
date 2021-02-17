@@ -1,0 +1,88 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffcccc;
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+nav > li {
+  height: 100%;
+  position: relative;
+  text-align: center;
+  line-height: 100px;
+  flex: 1;
+}
+nav > li::before,
+nav > li::after {
+  content: "";
+  display: block;
+  position: absolute;
+  background-color: royalblue;
+  display: none;
+}
+nav > li::before {
+  width: 100%;
+  height: 10px;
+  left: 0;
+  bottom: 0;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+nav > li::after {
+  width: 10px;
+  height: 10px;
+  top: 0;
+  left: calc(50% - 5px);
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+}
+nav > li > a {
+  font-size: 2em;
+}
+nav > li ol {
+  top: 100px;
+  width: 100%;
+  position: absolute;
+  transform-origin: 50% 0;
+  transform: scaleY(0);
+  transition: transform 1s ease;
+  border: 1px solid #000;
+  border-radius: 6px;
+}
+nav > li ol li {
+  border: 1px solid #000;
+  background-color: #CCFFFF;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+}
+nav > li ol li a {
+  display: inline-block;
+  width: 100%;
+}
+nav > li ol li:hover {
+  background-color: seashell;
+}
+nav > li:hover ol {
+  transform: scaleY(1);
+}
+nav > li:hover::before,
+nav > li:hover::after {
+  display: block;
+}

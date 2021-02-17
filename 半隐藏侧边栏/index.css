@@ -1,0 +1,119 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  height: 100vh;
+}
+div {
+  box-sizing: border-box;
+}
+.contaioner {
+  height: 100%;
+}
+.contaioner input {
+  display: none;
+}
+.contaioner .sidebar {
+  transition: all 1s ease;
+  position: absolute;
+  width: 20%;
+  height: 100%;
+  background-color: #0099cc;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 3px;
+}
+.contaioner .sidebar .avator {
+  border-radius: 50%;
+  width: 50%;
+  height: auto;
+}
+.contaioner .sidebar .slogan {
+  width: 60%;
+  font-size: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+.contaioner .sidebar ul {
+  width: 100%;
+}
+.contaioner .sidebar ul li {
+  border-left: 5px solid transparent;
+  letter-spacing: 6px;
+  text-align: center;
+  font-size: 1.5em;
+  list-style: none;
+  margin-top: 10px;
+  transition: all 0.2s ease;
+}
+.contaioner .sidebar ul li a {
+  text-decoration: none;
+}
+.contaioner .sidebar ul li:hover {
+  border-left: 5px solid #003399;
+  background-color: #ff6666;
+  transition: all 0.2s ease;
+}
+.contaioner .content {
+  float: right;
+  width: 80%;
+  height: 100%;
+  background-color: #cccccc;
+  transition: all 1s ease;
+}
+.contaioner .content nav {
+  height: 5%;
+  background-color: #ffffff;
+  position: relative;
+}
+.contaioner .content nav #sdB {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  left: 10px;
+  top: calc(50% - 15px);
+  background-color: pink;
+}
+.contaioner .content nav #sdB::before,
+.contaioner .content nav #sdB::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 25px;
+  height: 5px;
+  top: calc(50% - 2px);
+  left: calc(50% - 12px);
+  transform: rotateZ(0deg);
+  background-color: #000;
+}
+.contaioner .content nav #sdB::before {
+  transform: rotateZ(45deg);
+}
+.contaioner .content nav #sdB::after {
+  transform: rotateZ(-45deg);
+}
+.contaioner #sdC:checked ~ .sidebar {
+  width: 5%;
+  font-size: 10px;
+  transition: all 1s ease;
+}
+.contaioner #sdC:checked ~ .content {
+  transition: all 1s ease;
+  width: 95%;
+}
+.contaioner #sdC:checked ~ .content #sdB::before,
+.contaioner #sdC:checked ~ .content #sdB::after {
+  transform: rotateZ(0);
+}
+.contaioner #sdC:checked ~ .content #sdB::before {
+  top: calc(50% - 6px);
+}
+.contaioner #sdC:checked ~ .content #sdB::after {
+  top: calc(50% + 4px);
+}

@@ -1,0 +1,42 @@
+input {
+  opacity: 0;
+}
+label {
+  display: block;
+  width: 80px;
+  height: 40px;
+  border: 2px solid #000;
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+  .switchBtn {
+    display: block;
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    background-color: rgb(244, 248, 250);
+    top: 0;
+    left: 0;
+    transition: all 0.2s linear;
+  }
+  .bgc {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    top: 0;
+    z-index: -1;
+    transition: all 0.2s linear;
+  }
+  input:checked ~ .switchBtn {
+    left: 40px;
+    transition: all 0.2s linear;
+  }
+  input:checked ~ .bgc {
+    background-color: green;
+    transition: all 0.2s linear;
+  }
+}

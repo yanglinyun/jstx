@@ -1,0 +1,33 @@
+.circle{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border:5px solid transparent;
+    border-left-color: skyblue;
+    border-bottom-color: skyblue;
+    margin: 10px auto;
+    transform: rotate(-45deg);
+    position: relative;
+    //animation: circleM 2s linear alternate infinite;
+    -webkit-box-reflect: below 5px -webkit-linear-gradient(transparent 10%,rgba(0,0,0,.5));
+   .ball{
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: black;
+        top: 4px;
+        left: 5px;
+    }
+}
+@keyframes circleM{
+    0%{
+        transform: rotate(45deg);
+    }
+    50%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(-45deg);
+    }
+}

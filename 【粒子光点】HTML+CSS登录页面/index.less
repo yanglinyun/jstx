@@ -1,0 +1,142 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  background-color: #339999;
+  height: 100vh;
+  width: 100%;
+}
+form {
+  position: relative;
+  margin: 100px auto;
+  width: 350px;
+  height: 300px;
+  border: 3px solid #333366;
+  border-radius: 5px;
+  box-shadow: 10px 10px 10px #333366;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  h1 {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .inputC {
+    outline: 0;
+    border: 0;
+    border-bottom: 3px solid #000;
+    background-color: #ffffcc;
+
+    height: 10%;
+    font: 16px bold;
+    padding-left: 3px;
+  }
+  .sLabel {
+    position: relative;
+    top: -42px;
+    left: -60px;
+    pointer-events: none;
+    font-weight: bold;
+    color: #990033;
+    transition: top 1s ease;
+  }
+  .inputC:valid + .sLabel,
+  .inputC:focus + .sLabel {
+    top: -70px;
+    transition: top 1s ease;
+  }
+  button[type="submit"] {
+    position: relative;
+    width: 100px;
+    height: 30px;
+    top: -20px;
+    font-weight: bold;
+    
+    overflow: hidden;
+    border: 0;
+    background-color: #03e9f4;
+    &:hover {
+      
+      box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
+        0 0 100px #03e9f4;
+        }
+  }
+  .liner {
+    position: absolute;
+    width: 20px;
+    height: 3px;
+    background-color: aquamarine;
+  }
+  #line1 {
+    top: 0;
+    left: -100%;
+    background: linear-gradient(to left, #e66465, #9198e5);
+    animation: m1 1s linear infinite;
+  }
+  #line2 {
+    transform-origin: 100% 0;
+    transform: rotate(-90deg);
+    top: -100%;
+    right: 3px;
+
+    background: linear-gradient(to top, #e66465, #9198e5);
+    animation: m2 1s linear infinite 0.25s;
+  }
+  #line3 {
+    bottom: 0;
+    right: -100%;
+    background: linear-gradient(to right, #e66465, #9198e5);
+    animation: m3 1s linear infinite 0.5s;
+  }
+  #line4 {
+    transform-origin: 0 0;
+    transform: rotate(90deg);
+    bottom: -100%;
+    left: 3px;
+    background: linear-gradient(to bottom, #e66465, #9198e5);
+    animation: m4 1s linear infinite 0.75s;
+  }
+}
+@keyframes m1 {
+  0% {
+    left: -100%;
+  }
+
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+@keyframes m2 {
+  0% {
+    top: -100%;
+  }
+
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+@keyframes m3 {
+  0% {
+    right: -100%;
+  }
+
+  50%,
+  100% {
+    right: 100%;
+  }
+}
+@keyframes m4 {
+  0% {
+    bottom: -100%;
+  }
+
+  50%,
+  100% {
+    bottom: 200%;
+  }
+}

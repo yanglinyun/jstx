@@ -1,0 +1,26 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  height: 100vh;
+  position: relative;
+}
+.textBox {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.textBox span {
+  font-size: 100px;
+  color: #fff;
+  /* 这是字体的描边第一个值是粗细,第二个值是颜色 */
+  -webkit-text-stroke: 3px #000;
+  /* 单词大写 */
+  text-transform: uppercase;
+  /* 文字阴影 */
+  text-shadow: 0 0 #f3c623, 0 0 #f2aaaa;
+  /* 让文字先向下走自身高度的50%,然后顺时针旋转4度 */
+  transform: translate(0, 50%) rotate(4deg);
+}

@@ -1,0 +1,78 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  height: 100vh;
+}
+.slider {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 5px solid #000;
+  overflow: hidden;
+  width: 400px;
+  height: 350px;
+  position: absolute;
+}
+.slider input {
+  display: none;
+}
+.slider label {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+}
+.slider label[for="p1"] {
+  left: calc(50% - 5 * 6px);
+}
+.slider label[for="p2"] {
+  left: calc(50% - 5 * 2px);
+}
+.slider label[for="p3"] {
+  left: calc(50% + 5 * 2px);
+}
+.slider label[for="p4"] {
+  left: calc(50% + 5 * 6px);
+}
+.slider input:checked + label {
+  box-shadow: 0 0 0 3px inset red;
+}
+.slider input[id="p1"]:checked ~ .imgList {
+  left: 0px;
+  transition: all 1s ease;
+}
+.slider input[id="p2"]:checked ~ .imgList {
+  left: -400px;
+  transition: all 1s ease;
+}
+.slider input[id="p3"]:checked ~ .imgList {
+  left: -800px;
+  transition: all 1s ease;
+}
+.slider input[id="p4"]:checked ~ .imgList {
+  left: -1200px;
+  transition: all 1s ease;
+}
+.slider .imgList {
+  transition: all 1s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  z-index: -1;
+  width: 1600px;
+  height: 100%;
+  font-size: 0;
+  left: 0;
+}
+.slider .imgList li {
+  display: inline-block;
+}
+.slider .imgList li img {
+  width: 400px;
+}

@@ -1,0 +1,35 @@
+body {
+  height: 100vh;
+}
+.ripple {
+  position: relative;
+  height: 200px;
+  span {
+    display: block;
+    width: 1px;
+    height: 1px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: rippleM 2s infinite;
+    animation-delay: calc(0.2s * var(--i));
+  }
+}
+.ripple:nth-child(2){
+    span{
+        background-color: green;
+    }
+}
+@keyframes rippleM {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    width: 100px;
+    height: 100px;
+    opacity: 0;
+  }
+}
